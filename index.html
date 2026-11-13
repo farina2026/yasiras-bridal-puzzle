@@ -3,170 +3,196 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yasira's Bridal Puzzle</title>
+  <title>Yasira's Bridal Emoji Love Puzzle</title>
   <style>
     body {
       font-family: 'Georgia', serif;
-      background: linear-gradient(135deg, #fdfbfb 0%, #f3e7e9 100%);
-      color: #4a3b47;
+      background: #faf8f5;
+      color: #3b302a;
       margin: 0;
-      padding: 20px;
+      padding: 15px;
       display: flex;
       justify-content: center;
-      align-items: center;
-      min-height: 100vh;
     }
     .container {
       background: #ffffff;
-      max-width: 500px;
+      max-width: 750px;
       width: 100%;
       padding: 30px 25px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      border: 1px solid #f0dbe2;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 2px solid #d4c5b9;
+    }
+    .header-section {
       text-align: center;
+      border-bottom: 2px solid #e6ded6;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
     }
-    h1 {
-      color: #8e4568;
-      font-size: 28px;
-      margin-bottom: 5px;
-    }
-    p.subtitle {
-      font-style: italic;
-      color: #7d6b78;
-      margin-top: 0;
-      margin-bottom: 25px;
-      font-size: 15px;
-    }
-    .question-box {
+    .name-box-container {
+      margin-bottom: 15px;
       text-align: left;
-      margin-bottom: 18px;
-      background: #faf5f7;
-      padding: 15px;
-      border-radius: 10px;
-      border-left: 4px solid #c97b9d;
-    }
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 8px;
-      font-size: 15px;
-    }
-    input[type="text"] {
+      display: inline-block;
       width: 100%;
-      padding: 10px;
-      border: 1px solid #d8b4c4;
-      border-radius: 6px;
-      font-size: 16px;
-      box-sizing: border-box;
+      max-width: 350px;
+    }
+    .name-box-container label {
+      font-size: 13px;
+      color: #705f52;
+      display: block;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+    .name-box-container input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #c7b5a8;
+      border-radius: 4px;
+      font-size: 15px;
       outline: none;
     }
-    input[type="text"]:focus {
-      border-color: #8e4568;
+    h1 {
+      color: #3a2e26;
+      font-size: 32px;
+      margin: 5px 0;
+      font-weight: normal;
+      font-family: 'Georgia', serif;
+    }
+    .subtitle {
+      font-style: italic;
+      color: #6b5c51;
+      font-size: 15px;
+      margin: 0;
+    }
+    .puzzle-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 25px;
+    }
+    @media (max-width: 650px) {
+      .puzzle-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fcfbfa;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #f0eae4;
+    }
+    .num {
+      font-weight: bold;
+      color: #705f52;
+      width: 25px;
+      font-size: 14px;
+    }
+    .emojis {
+      font-size: 20px;
+      letter-spacing: 2px;
+      flex-grow: 1;
+      text-align: left;
+      padding: 0 8px;
+    }
+    .answer-input {
+      width: 130px;
+      padding: 6px 8px;
+      border: 1px solid #d4c5b9;
+      border-radius: 4px;
+      font-size: 14px;
+      outline: none;
+      background: #fff;
+    }
+    .answer-input:focus {
+      border-color: #8c7355;
+    }
+    .submit-wrap {
+      text-align: center;
+      margin-top: 25px;
     }
     button {
-      background-color: #8e4568;
+      background-color: #5c6b53;
       color: white;
       border: none;
-      padding: 14px 28px;
+      padding: 12px 30px;
       font-size: 16px;
-      border-radius: 25px;
+      border-radius: 20px;
       cursor: pointer;
-      margin-top: 10px;
-      width: 100%;
       font-weight: bold;
-      transition: background 0.3s;
+      transition: background 0.2s;
     }
     button:hover {
-      background-color: #723452;
+      background-color: #485442;
     }
-    .feedback {
-      margin-top: 6px;
-      font-size: 13px;
-      font-weight: bold;
-    }
-    .correct { color: #2e7d32; }
-    .incorrect { color: #c62828; }
-    #celebration {
+    #thank-you {
       display: none;
-      margin-top: 20px;
-      padding: 15px;
-      background: #e8f5e9;
-      color: #2e7d32;
-      border-radius: 10px;
+      margin-top: 15px;
+      color: #3b5331;
       font-weight: bold;
+      text-align: center;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>✨ Yasira's Bridal Puzzle ✨</h1>
-  <p class="subtitle">How well do you know the bride? Solve all 4 clues!</p>
-
-  <div class="question-box">
-    <label for="q1">1. Unscramble the bride's favorite flower: S O R E</label>
-    <input type="text" id="q1" placeholder="Type your answer...">
-    <div id="f1" class="feedback"></div>
+  <div class="header-section">
+    <div class="name-box-container">
+      <label for="guest-name">Enter your name</label>
+      <input type="text" id="guest-name" placeholder="Your name...">
+    </div>
+    <h1>Yasira's Bridal Emoji Love Puzzle</h1>
+    <p class="subtitle">Decode the emoji clues and write the right love-themed phrase!</p>
   </div>
 
-  <div class="question-box">
-    <label for="q2">2. What is something old, something new, something borrowed, and something ____?</label>
-    <input type="text" id="q2" placeholder="Type your answer...">
-    <div id="f2" class="feedback"></div>
+  <div class="puzzle-grid">
+    <!-- Left Column (1 to 11) -->
+    <div>
+      <div class="row"><span class="num">1.</span><span class="emojis">🍯🌙</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">2.</span><span class="emojis">👰‍♀️👠</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">3.</span><span class="emojis">🤵👰‍♀️💒🔔</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">4.</span><span class="emojis">💖✨👀</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">5.</span><span class="emojis">💘💍</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">6.</span><span class="emojis">💄💋</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">7.</span><span class="emojis">🐦💙🐦💙</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">8.</span><span class="emojis">🙈💌</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">9.</span><span class="emojis">🐶❤️</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">10.</span><span class="emojis">🎀💕</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">11.</span><span class="emojis">🥨💍</span><input type="text" class="answer-input"></div>
+    </div>
+
+    <!-- Right Column (12 to 21) -->
+    <div>
+      <div class="row"><span class="num">12.</span><span class="emojis">👰‍♀️💙</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">13.</span><span class="emojis">😊❤️📖</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">14.</span><span class="emojis">👸👑❤️</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">15.</span><span class="emojis">🤪❤️👩‍❤️‍👨</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">16.</span><span class="emojis">💘🎯</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">17.</span><span class="emojis">🔒❤️</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">18.</span><span class="emojis">💃🕺</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">19.</span><span class="emojis">🤴🐎⚔️🛡️</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">20.</span><span class="emojis">🫛🫛</span><input type="text" class="answer-input"></div>
+      <div class="row"><span class="num">21.</span><span class="emojis">💗💨</span><input type="text" class="answer-input"></div>
+    </div>
   </div>
 
-  <div class="question-box">
-    <label for="q3">3. Unscramble this wedding essential: G I N R</label>
-    <input type="text" id="q3" placeholder="Type your answer...">
-    <div id="f3" class="feedback"></div>
-  </div>
-
-  <div class="question-box">
-    <label for="q4">4. What month is Yasira's celebration?</label>
-    <input type="text" id="q4" placeholder="Type your answer...">
-    <div id="f4" class="feedback"></div>
-  </div>
-
-  <button onclick="checkAnswers()">Check My Answers</button>
-
-  <div id="celebration">
-    🎉 Congratulations! You solved Yasira's Bridal Puzzle! 🎉
+  <div class="submit-wrap">
+    <button onclick="submitPuzzle()">Submit Answers</button>
+    <div id="thank-you">✨ Thank you! Your emoji puzzle answers have been noted! ✨</div>
   </div>
 </div>
 
 <script>
-  function checkAnswers() {
-    // You can change the correct answers below inside the quotes (keep them lowercase)
-    const answers = {
-      q1: "rose",
-      q2: "blue",
-      q3: "ring",
-      q4: "november"
-    };
-
-    let score = 0;
-
-    for (let i = 1; i <= 4; i++) {
-      const userInput = document.getElementById('q' + i).value.trim().toLowerCase();
-      const feedbackEl = document.getElementById('f' + i);
-
-      if (userInput === answers['q' + i]) {
-        feedbackEl.textContent = "✓ Correct!";
-        feedbackEl.className = "feedback correct";
-        score++;
-      } else {
-        feedbackEl.textContent = "✗ Try again!";
-        feedbackEl.className = "feedback incorrect";
-      }
+  function submitPuzzle() {
+    const name = document.getElementById('guest-name').value;
+    if(!name.trim()) {
+      alert("Please enter your name at the top first!");
+      return;
     }
-
-    const celebration = document.getElementById('celebration');
-    if (score === 4) {
-      celebration.style.display = "block";
-    } else {
-      celebration.style.display = "none";
-    }
+    document.getElementById('thank-you').style.display = "block";
   }
 </script>
 
