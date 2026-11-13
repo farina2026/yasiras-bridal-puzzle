@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yasira's Bridal Puzzle</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #fdfbfb 0%, #f3e7e9 100%);
+      color: #4a3b47;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: #ffffff;
+      max-width: 500px;
+      width: 100%;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid #f0dbe2;
+      text-align: center;
+    }
+    h1 {
+      color: #8e4568;
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+    p.subtitle {
+      font-style: italic;
+      color: #7d6b78;
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-size: 15px;
+    }
+    .question-box {
+      text-align: left;
+      margin-bottom: 18px;
+      background: #faf5f7;
+      padding: 15px;
+      border-radius: 10px;
+      border-left: 4px solid #c97b9d;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d8b4c4;
+      border-radius: 6px;
+      font-size: 16px;
+      box-sizing: border-box;
+      outline: none;
+    }
+    input[type="text"]:focus {
+      border-color: #8e4568;
+    }
+    button {
+      background-color: #8e4568;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #723452;
+    }
+    .feedback {
+      margin-top: 6px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .correct { color: #2e7d32; }
+    .incorrect { color: #c62828; }
+    #celebration {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
 
+<div class="container">
+  <h1>✨ Yasira's Bridal Puzzle ✨</h1>
+  <p class="subtitle">How well do you know the bride? Solve all 4 clues!</p>
+
+  <div class="question-box">
+    <label for="q1">1. Unscramble the bride's favorite flower: S O R E</label>
+    <input type="text" id="q1" placeholder="Type your answer...">
+    <div id="f1" class="feedback"></div>
+  </div>
+
+  <div class="question-box">
+    <label for="q2">2. What is something old, something new, something borrowed, and something ____?</label>
+    <input type="text" id="q2" placeholder="Type your answer...">
+    <div id="f2" class="feedback"></div>
+  </div>
+
+  <div class="question-box">
+    <label for="q3">3. Unscramble this wedding essential: G I N R</label>
+    <input type="text" id="q3" placeholder="Type your answer...">
+    <div id="f3" class="feedback"></div>
+  </div>
+
+  <div class="question-box">
+    <label for="q4">4. What month is Yasira's celebration?</label>
+    <input type="text" id="q4" placeholder="Type your answer...">
+    <div id="f4" class="feedback"></div>
+  </div>
+
+  <button onclick="checkAnswers()">Check My Answers</button>
+
+  <div id="celebration">
+    🎉 Congratulations! You solved Yasira's Bridal Puzzle! 🎉
+  </div>
+</div>
+
+<script>
+  function checkAnswers() {
+    // You can change the correct answers below inside the quotes (keep them lowercase)
+    const answers = {
+      q1: "rose",
+      q2: "blue",
+      q3: "ring",
+      q4: "november"
+    };
+
+    let score = 0;
+
+    for (let i = 1; i <= 4; i++) {
+      const userInput = document.getElementById('q' + i).value.trim().toLowerCase();
+      const feedbackEl = document.getElementById('f' + i);
+
+      if (userInput === answers['q' + i]) {
+        feedbackEl.textContent = "✓ Correct!";
+        feedbackEl.className = "feedback correct";
+        score++;
+      } else {
+        feedbackEl.textContent = "✗ Try again!";
+        feedbackEl.className = "feedback incorrect";
+      }
+    }
+
+    const celebration = document.getElementById('celebration');
+    if (score === 4) {
+      celebration.style.display = "block";
+    } else {
+      celebration.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>
